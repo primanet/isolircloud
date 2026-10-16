@@ -3,7 +3,7 @@ const DEFAULT_API_URL = 'https://api-main.onebilling.cloud';
 
 // Get URL query params
 const urlParams = new URLSearchParams(window.location.search);
-const tenantIdParam = urlParams.get('tenantId') || urlParams.get('tenant') || '';
+const tenantIdParam = urlParams.get('tenantId') || urlParams.get('tenant') || '1';
 const apiBase = urlParams.get('api') || DEFAULT_API_URL;
 
 let currentSettings = null;
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // 1. Load Data from Backend
 async function loadIsolirInfo() {
     try {
-        const queryStr = tenantIdParam ? `?tenantId=${tenantIdParam}` : '';
+        const queryStr = `?tenantId=${tenantIdParam}&_t=${Date.now()}`;
         const res = await fetch(`${apiBase}/api/portal/isolir-info${queryStr}`);
         const data = await res.json();
 
