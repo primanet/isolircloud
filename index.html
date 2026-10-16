@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemberitahuan Layanan Terisolir</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="glow-bg"></div>
+
+    <main class="isolir-container">
+        <!-- Header Branding -->
+        <header class="header-card">
+            <div class="logo-wrapper">
+                <img id="isp-logo" src="https://api-main.onebilling.cloud/uploads/logos/default.png" alt="Logo ISP" onerror="this.style.display='none'">
+                <div class="isp-text">
+                    <h2 id="isp-name">Layanan Internet</h2>
+                    <span class="status-badge" id="status-badge">
+                        <span class="badge-dot"></span>
+                        AKSES DIISOLIR
+                    </span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Warning Card -->
+        <section class="alert-card">
+            <div class="alert-icon-wrap">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+            </div>
+            <h1 id="isolir-title">Layanan Internet Terisolir</h1>
+            <p id="isolir-subtitle">
+                Masa aktif layanan internet Anda telah berakhir atau memiliki tagihan bulanan yang belum diselesaikan. Segera lakukan pembayaran agar akses internet dapat kembali aktif secara otomatis.
+            </p>
+        </section>
+
+        <!-- Interactive Bill Checker -->
+        <section class="check-bill-card">
+            <div class="card-header-sm">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <h3>Cek Rincian Tagihan Saya</h3>
+            </div>
+            <p class="bill-instruction">Masukkan No. WhatsApp terdaftar atau ID/Username PPPoE Anda:</p>
+            <form id="check-bill-form" class="check-form">
+                <input type="text" id="bill-query" placeholder="Contoh: 08123456789 atau user_pppoe" required autocomplete="off">
+                <button type="submit" id="btn-check-bill">
+                    <span>Periksa</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </form>
+
+            <!-- Bill Result Container -->
+            <div id="bill-result" class="bill-result hidden">
+                <div class="customer-info-box">
+                    <div class="info-row">
+                        <span class="info-label">Nama Pelanggan</span>
+                        <strong class="info-val" id="res-nama">-</strong>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Paket Layanan</span>
+                        <span class="info-val" id="res-paket">-</span>
+                    </div>
+                    <div class="info-row total-row">
+                        <span class="info-label">Total Tagihan Belum Dibayar</span>
+                        <strong class="info-total" id="res-total">Rp 0</strong>
+                    </div>
+                </div>
+
+                <div class="unpaid-list-wrap">
+                    <span class="unpaid-list-title">Daftar Tagihan:</span>
+                    <ul id="res-invoices-list" class="invoices-list"></ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment Methods Card -->
+        <section class="payment-card">
+            <div class="card-header-sm">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                    <line x1="2" y1="10" x2="22" y2="10"></line>
+                </svg>
+                <h3>Tujuan Pembayaran Transfer</h3>
+            </div>
+
+            <!-- Dynamic Banks Container -->
+            <div id="banks-container" class="banks-container">
+                <div class="bank-box">
+                    <div class="bank-top">
+                        <span class="bank-badge">BANK BCA</span>
+                        <button type="button" class="btn-copy" onclick="copyRekening('1234567890')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                            <span>Salin No. Rek</span>
+                        </button>
+                    </div>
+                    <div class="bank-number">1234567890</div>
+                    <div class="bank-holder">a.n <strong>NAMA PEMILIK REKENING</strong></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Action Confirmation & WhatsApp -->
+        <section class="action-card">
+            <div class="card-header-sm">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <h3>Konfirmasi Pembayaran</h3>
+            </div>
+            <p class="action-text" id="isolir-note">
+                Setelah Anda menyelesaikan transfer, silakan klik tombol di bawah untuk mengirimkan bukti transfer via WhatsApp agar admin/sistem dapat memulihkan akses internet Anda segera.
+            </p>
+            <a href="#" id="btn-wa" target="_blank" rel="noopener noreferrer" class="btn-wa">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.969.587 1.961.947 3.01.948 3.182 0 5.768-2.587 5.769-5.766.001-3.182-2.585-5.769-5.768-5.769zm10.211 5.741c-.004 5.642-4.591 10.229-10.232 10.229-1.785 0-3.511-.466-5.039-1.348l-5.617 1.472 1.498-5.474c-.968-1.583-1.478-3.398-1.477-5.263.004-5.642 4.591-10.23 10.232-10.23 5.64 0 10.226 4.588 10.231 10.23l.004.384z"/>
+                </svg>
+                <span>Konfirmasi via WhatsApp</span>
+            </a>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; <span id="current-year">2026</span> <span id="footer-isp">OneBilling Cloud</span>. Seluruh Hak Cipta Dilindungi.</p>
+        </footer>
+    </main>
+
+    <!-- Copy Toast Notification -->
+    <div id="toast" class="toast hidden">Nomor rekening berhasil disalin!</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
